@@ -1,0 +1,132 @@
+/* ~/.config/rofi/vicinae.rasi */
+ configuration {
+    modi: "drun,run,window,clipboard:~/.local/bin/rofi-cliphist";
+    display-clipboard: "clipboard";
+    display-columns: "2";
+    display-column-separator: "'\t'";
+    /* Mouse & selection behaviors */
+    hover-select: true;
+    me-select-entry: "";
+    me-accept-entry: "MousePrimary";
+    drun-display-format: "{name}";
+}
+* {
+    /* Vicinae / Raycast Dark Color Palette */
+    bg-base:      #121319;
+    bg-surface:   #1a1b23;
+    bg-selected:  #252732;
+    border-col:   #2e303e;
+    
+    fg-primary:   #f1f2f8;
+    fg-secondary: #8b8ea0;
+    fg-muted:     #575a6e;
+    accent:       #6366f1;
+
+    background-color: transparent;
+    text-color:       @fg-primary;
+    
+    /* Set font to SF Pro Display or SF Pro Text */
+    font:             "SF Pro Text 12";
+}
+
+/* Strip generic application descriptors like (terminal), (web browser), etc. */
+configuration {
+    drun-display-format: "{name}";
+}
+
+window {
+    background-color: @bg-base;
+    border:           1px;
+    border-color:     @border-col;
+    border-radius:    12px;
+    width:            720px;
+    padding:          0px;
+    location:         center;
+    anchor:           center;
+}
+
+mainbox {
+    children: [ inputbar, listview, mode-switcher ];
+    spacing:  0px;
+}
+
+/* Vicinae Header Search Bar */
+inputbar {
+    background-color: @bg-surface;
+    border:           0px 0px 1px 0px;
+    border-color:     @border-col;
+    padding:          14px 18px;
+    spacing:          12px;
+    children:         [ prompt, entry ];
+}
+
+prompt {
+    text-color: @accent;
+    str:        " ";
+    font:       "Font Awesome 6 Free 11";
+}
+
+entry {
+    placeholder:        "Search applications, extensions, and commands...";
+    placeholder-color:  @fg-muted;
+    text-color:         @fg-primary;
+}
+
+/* Main Item List */
+listview {
+    lines:        8;
+    columns:      1;
+    fixed-height: false;
+    padding:      10px;
+    spacing:      4px;
+    scrollbar:    false;
+}
+
+element {
+    padding:       9px 12px;
+    border-radius: 8px;
+    spacing:       12px;
+    children:      [ element-icon, element-text ];
+}
+
+element-icon {
+    size: 22px;
+}
+
+element-text {
+    vertical-align: 0.5;
+    text-color:     @fg-primary;
+    highlight:      none;
+}
+
+element selected {
+    background-color: @bg-selected;
+    text-color:       @accent;
+}
+
+element selected element-text {
+    text-color: @fg-primary;
+}
+
+/* Vicinae Action Footer Bar */
+mode-switcher {
+    background-color: @bg-surface;
+    border:           1px 0px 0px 0px;
+    border-color:     @border-col;
+    padding:          8px 16px;
+    spacing:          10px;
+}
+
+button {
+    padding:          4px 8px;
+    border-radius:    6px;
+    background-color: transparent;
+    text-color:       @fg-secondary;
+    horizontal-align: 0.5;
+}
+
+button selected {
+    background-color: @bg-selected;
+    text-color:       @accent;
+}
+

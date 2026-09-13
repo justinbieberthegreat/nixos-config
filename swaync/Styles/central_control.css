@@ -1,0 +1,344 @@
+/* Demure Notification Center - compact, quiet, no overlap */
+
+@define-color text           #1a2332;
+@define-color background     #6082b6;
+@define-color selected       @primary;
+@define-color hover          @secondary;
+@define-color urgent         @error;
+
+* {
+  color: @text;
+  all: unset;
+  font-size: 14px;
+  font-family: "SF Pro" "JetBrainsMono Nerd Font Propo", sans-serif;
+  transition: background 150ms ease, border-color 150ms ease, opacity 150ms ease;
+}
+
+.blank-window { 
+  background: transparent;
+}
+
+/* ==================== CONTROL CENTER ==================== */
+
+.control-center {
+  background: @background;
+  border-radius: 16px;
+  border: 1px solid alpha(@text, .08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .3);
+  margin: 8px;
+  padding: 0;
+}
+
+/* ==================== TITLE ==================== */
+
+.widget-title {
+  font-size: 1.05em;
+  font-weight: 600;
+  margin: 0;
+  padding: 14px 16px 10px 16px;
+  border-bottom: 1px solid alpha(@text, .08);
+}
+
+.widget-title button {
+  background: alpha(@text, .1);
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  min-height: 26px;
+}
+
+.widget-title button:hover {
+  background: alpha(@hover, .18);
+}
+
+.widget-title button:active {
+  background: alpha(@selected, .22);
+}
+
+/* ==================== QUICK SETTINGS BUTTONS ==================== */
+
+.widget-buttons-grid {
+  padding: 12px 16px;
+  margin: 0;
+  background: transparent;
+}
+
+.widget-buttons-grid > flowbox {
+  padding: 0;
+  margin: 0;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild {
+  padding: 0;
+  margin: 0;
+}
+
+/* fixed spacing via margin on the button itself, symmetric, no leftover gaps */
+.widget-buttons-grid > flowbox > flowboxchild > button {
+  margin: 3px;
+  background: alpha(@text, .08);
+  border: 1px solid alpha(@text, .07);
+  border-radius: 10px;
+  min-height: 44px;
+  min-width: 44px;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button:hover {
+  background: alpha(@hover, .16);
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button:active {
+  background: alpha(@selected, .22);
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button:checked {
+  background: alpha(@selected, .18);
+  border-color: alpha(@selected, .3);
+  color: @selected;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button label {
+  font-family: "JetBrains Mono Nerd Font";
+  font-size: 15px;
+  opacity: 0.85;
+}
+
+/* ==================== VOLUME & BACKLIGHT SLIDERS ==================== */
+
+.widget-volume,
+.widget-backlight {
+  background: transparent;
+  padding: 6px 16px;
+  margin: 0;
+  border-top: 1px solid alpha(@text, .06);
+}
+
+.widget-volume {
+  border-top: none;
+  padding-top: 10px;
+}
+
+.widget-volume trough,
+.widget-backlight trough {
+  background: #dbdabe
+  border-radius: 8px;
+  min-height: 5px;
+}
+
+.widget-volume highlight,
+.widget-backlight highlight {
+  background: #dbdabe;
+  border-radius: 8px;
+}
+
+/* icon-sized labels, not headline-sized */
+.widget-volume label,
+.widget-backlight label {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 14px;
+  min-width: 16px;
+  margin-right: 12px;
+  opacity: 0.75;
+}
+
+.widget-volume slider,
+.widget-backlight slider {
+  background: #6082b6;
+  border-radius: 50%;
+  min-height: 12px;
+  min-width: 12px;
+  margin: -4px 0;
+  box-shadow: 0 0 0 2px alpha(@selected, .5);
+}
+
+.widget-volume slider:hover,
+.widget-backlight slider:hover {
+  min-height: 13px;
+  min-width: 13px;
+}
+
+/* ==================== DO NOT DISTURB ==================== */
+
+.widget-dnd {
+  margin: 0;
+  padding: 10px 16px;
+  background: transparent;
+  border-top: 1px solid alpha(@text, .06);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.widget-dnd > switch {
+  background: alpha(@text, .18);
+  border-radius: 20px;
+  padding: 2px;
+  min-width: 36px;
+  min-height: 20px;
+}
+
+.widget-dnd > switch:checked {
+  background: @selected;
+}
+
+.widget-dnd > switch slider {
+  background: @background;
+  border-radius: 50%;
+  min-width: 16px;
+  min-height: 16px;
+}
+
+/* ==================== MEDIA PLAYER ==================== */
+
+.widget-mpris {
+  background: transparent;
+  margin: 0;
+  padding: 10px 16px;
+  border-top: 1px solid alpha(@text, .06);
+}
+
+.widget-mpris-player {
+  background: alpha(@text, .05);
+  border: 1px solid alpha(@text, .07);
+  border-radius: 12px;
+  padding: 10px;
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.widget-mpris .widget-mpris-player .mpris-background {
+  filter: blur(24px) brightness(0.5);
+  opacity: 0.4;
+  border-radius: 12px;
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  right: -12px;
+  bottom: -12px;
+}
+
+.widget-mpris-album-art {
+  border-radius: 8px;
+  border: 1px solid alpha(@text, .1);
+  margin: 0 10px 0 0;
+  min-width: 52px;
+  min-height: 52px;
+}
+
+.widget-mpris-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 2px;
+  line-height: 1.25;
+}
+
+.widget-mpris-subtitle {
+  font-weight: 400;
+  font-size: 0.8rem;
+  opacity: 0.65;
+  line-height: 1.25;
+}
+
+/* no negative margins, no overlap, evenly spaced transport row */
+.widget-mpris button {
+  opacity: 0.8;
+  margin: 8px 4px 0 4px;
+  min-width: 30px;
+  min-height: 30px;
+  border-radius: 50%;
+  background: alpha(@text, .07);
+}
+
+.widget-mpris button:hover {
+  background: alpha(@hover, .18);
+}
+
+.widget-mpris button:active {
+  background: alpha(@selected, .22);
+}
+
+.widget-mpris button:nth-child(3) {
+  min-width: 34px;
+  min-height: 34px;
+  background: alpha(@selected, .16);
+}
+
+.widget-mpris button:nth-child(3):hover {
+  background: alpha(@selected, .26);
+}
+
+/* ==================== NOTIFICATIONS ==================== */
+
+.control-center .notification-row {
+  margin: 0;
+  padding: 6px 10px;
+}
+
+.control-center .notification-row .notification-background {
+  background: alpha(@text, .05);
+  border: 1px solid alpha(@text, .07);
+  border-radius: 12px;
+  margin: 3px 0;
+  padding: 0;
+}
+
+.control-center .notification-row .notification-background:hover {
+  background: alpha(@text, .08);
+}
+
+.control-center .notification-row .notification-background .notification.critical {
+  background: alpha(@urgent, .1);
+  border-left: 3px solid @urgent;
+  border-radius: 12px;
+}
+
+.control-center .notification-row .notification-background .notification .notification-content {
+  margin: 0;
+  padding: 10px 12px;
+}
+
+.control-center .notification-row .notification-background .notification .notification-content .notification-body {
+  padding-top: 4px;
+  opacity: 0.8;
+  line-height: 1.35;
+  font-size: 12.5px;
+}
+
+.control-center .notification-row .notification-background .notification > *:last-child > * {
+  min-height: auto;
+  padding: 6px 10px 10px 10px;
+}
+
+.control-center .notification-row .notification-background .notification > *:last-child > * .notification-action {
+  background: alpha(@selected, .16);
+  color: @selected;
+  border-radius: 8px;
+  margin: 3px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  min-height: 28px;
+}
+
+.control-center .notification-row .notification-background .notification > *:last-child > * .notification-action:hover {
+  background: alpha(@selected, .24);
+}
+
+/* empty-state icon shouldn't dominate a small panel */
+.control-center image.no-notifications {
+  opacity: 0.35;
+}
+
+/* ==================== NOTIFICATION POPUPS ==================== */
+
+.notification-row {
+  margin: 4px 8px;
+}
+
+.notification-row .notification-background {
+  background: alpha(@background, .96);
+  border-radius: 14px;
+  border: 1px solid alpha(@text, .08);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .25);
+}

@@ -1,0 +1,87 @@
+{
+    "layer": "top",
+    "height": 4,
+    "spacing": 1,
+    "margin": 4,
+    "modules-left": ["niri/workspaces"],
+    "modules-center": ["clock"],
+    "modules-right": ["memory#pill", "group/status"],
+
+    "clock": {
+    "format": "{:%H:%M %a, %b %d}"
+},
+    "battery": {
+	"interval": 60,
+	"format": "{icon} {capacity}%",
+	"format-icons": {
+		"default": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+		"charging": ["󰢟", "󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"]
+	},
+    "on-click": "swaync-client -t -sw",
+    "on-scroll-up": "swaync-client -t -sw",
+    "on-scroll-down":"swaync-client -t -sw"
+
+    },
+   "network": {
+    "interface": "wlp3s0",
+    "format": "{ifname}",
+    "format-wifi": "{icon}",
+    "format-icons": [
+        "󰤟", // 0-20% strength
+        "󰤢", // 21-40% strength
+        "󰤥", // 41-60% strength
+        "󰤨"  // 81-100% strength
+    ],
+    "format-ethernet": "{ifname} ",
+    "format-disconnected": "",
+    "max-length": 50,
+    "on-scroll-up": "swaync-client -t -sw",
+    "on-scroll-down":"swaync-client -t -sw",
+    "on-click": "swaync-client -t -sw"
+},
+    "custom/nixos": {
+    "format": "󱄅",
+    "tooltip": false
+},
+"memory#pill": {
+    "format": " {used:0.1f}G/15.4G",
+    "interval": 10,
+     "on-click": "exec alacritty --title=btop -e btop"
+},
+
+"niri/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+        "default": "",
+        "active": "",
+        "urgent": ""
+    }
+},
+
+"bluetooth": {
+	"format": "󰂯",
+	"format-connected": "󰂯",
+	"format-connected-battery": "󰂯"
+	// "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
+	"tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+	"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+	"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+	"tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+    "on-scroll-up": "swaync-client -t -sw",
+    "on-scroll-down":"swaync-client -t -sw",
+    "on-click": "swaync-client -t -sw"
+},
+
+"niri/language": {
+	"format": "{short}"
+},
+"group/status": {
+    "orientation": "horizontal",
+    "modules": [
+        "niri/language","bluetooth",
+        "network",
+        "battery"
+    ]
+}
+}
+
