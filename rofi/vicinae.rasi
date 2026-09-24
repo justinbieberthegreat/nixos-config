@@ -9,6 +9,8 @@
     me-select-entry: "";
     me-accept-entry: "MousePrimary";
     drun-display-format: "{name}";
+    icon-theme: "WhiteSur light";
+    show-icons: true;
 }
 * {
     /* Vicinae / Raycast Dark Color Palette */

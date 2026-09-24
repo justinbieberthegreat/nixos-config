@@ -1,63 +1,86 @@
-            "key": "wm",
-            "keyColor": "#94e2d5"
-        },
-        {
-            "type": "shell",
-            "key": "shell",
-            "keyColor": "#89dceb"
-        },
-        {
-            "type": "terminal",
-            "key": "term",
-            "keyColor": "#89b4fa"
-        },
-        {
-            "type": "cpu",
-            "key": "cpu",
-            "keyColor": "#b4befe",
-            "format": "{name}"
-        },
-        {
-            "type": "gpu",
-            "key": "gpu",
-            "keyColor": "#f5c2e7",
-            "format": "{name}"
-        },
-        {
-            "type": "memory",
-            "key": "mem",
-            "keyColor": "#f2cdcd"
-        },
-        {
-            "type": "disk",
-            "key": "disk",
-            "keyColor": "#eba0ac",
-            "format": "{size-used} / {size-total} ({size-percentage})"
-        },
-        "break",
-        {
+{
+  "display": {
+    "color": {
+      "keys": "#ffffff"
+    },
+    "key": {
+      "width": 14
+    },
+    "separator": "  "
+  },
+  "logo": {
+	  "type": "small",
+    "color": {
+      "1": "#ffffff"
+    },
+    "padding": {
+      "left": 2,
+      "top": 2
+    }
+  },
+  "modules": [
+    {
+      "color": {
+        "at": "#666666",
+        "host": "#ff8a8a",
+        "user": "#ff8a8a"
+      },
+      "type": "title"
+    },
+    "break",
+    {
+      "format": "{pretty-name}",
+      "key": "  OS",
+      "keyColor": "#71b7ff",
+      "type": "os"
+    },
+    {
+      "key": " 󰌽 Kernel",
+      "keyColor": "#d2a8ff",
+      "type": "kernel"
+    },
+    {
+      "format": "{pretty-name}",
+      "key": "  WM",
+      "keyColor": "#ff8a8a",
+      "type": "wm"
+    },
+    {
+      "format": "{pretty-name}",
+      "key": "  Shell",
+      "keyColor": "#8ddb8c",
+      "type": "shell"
+    },
+    {
+      "key": " 󰔚 Uptime",
+      "keyColor": "#d2b45f",
+      "type": "uptime"
+    },
+    {
+      "format": "{used} / {total}",
+      "key": "  Ram",
+      "keyColor": "#71b7ff",
+      "type": "memory"
+    },
+            {
         
     "type": "command",
-    "key": "os age",
-    "keyColor": "#B4CEB3",
+    "key": " 󰋑 OS Age",
+    "keyColor": "#F9CFF2",
     "text": "birth_install=$(stat -c %W /);current=$(date +%s);days_difference=$(( (current - birth_install) / 86400 )); echo $days_difference days"
 },
 {
     "type": "command",
-    "key": "os birthday",
-    "keyColor": "#8AA1B1",
-    "text": "birth_install=$(stat -c %W /); echo $(date -d @$birth_install '+%d %b %Y')"
+    "key": " 󰋑 OS BD" ,
+    "keyColor": "#A09BE7",
+    "text": "birth_install=$(stat -c %W /); echo $(date -d @$birth_install  '+%d %b %Y')"
 },
-        "break",
-        {
-            "type": "colors",
-            "paddingLeft": 0,
-            "symbol": "circle"
-        },
-        {
-            "type": "custom",
-            "format": " ⋆｡°✩"
-        }
-    ]
+    {
+      "format": "{pretty-name}",
+      "key": " 󰸱 Colors",
+      "symbol": "circle",
+      "type": "colors"
+    }
+  ]
 }
 

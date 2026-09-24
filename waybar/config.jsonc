@@ -27,10 +27,7 @@
     "format": "{ifname}",
     "format-wifi": "{icon}",
     "format-icons": [
-        "󰤟", // 0-20% strength
-        "󰤢", // 21-40% strength
-        "󰤥", // 41-60% strength
-        "󰤨"  // 81-100% strength
+        "󰤨" // 81-100% strength
     ],
     "format-ethernet": "{ifname} ",
     "format-disconnected": "",
@@ -61,7 +58,7 @@
 "bluetooth": {
 	"format": "󰂯",
 	"format-connected": "󰂯",
-	"format-connected-battery": "󰂯"
+	"format-connected-battery": "󰂯",
 	// "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
 	"tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
 	"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
@@ -72,13 +69,23 @@
     "on-click": "swaync-client -t -sw"
 },
 
-"niri/language": {
-	"format": "{short}"
+"custom/fcitx5": {
+    "exec": "fcitx5-remote -n 2>/dev/null | sed 's/keyboard-us/en/; s/keyboard-ru/ru/; s/mozc/あ/; s/hangul/한/' | grep . || echo 'en'",
+    "interval": 1,
+    "on-click": "fcitx5-remote -t",
+    "tooltip": false
 },
+
+"custom/myicon": {
+    "format": "󰋑 ", 
+    "tooltip": false,
+    "on-click": "echo i love you"
+},
+
 "group/status": {
     "orientation": "horizontal",
     "modules": [
-        "niri/language","bluetooth",
+        "custom/fcitx5","bluetooth",
         "network",
         "battery"
     ]

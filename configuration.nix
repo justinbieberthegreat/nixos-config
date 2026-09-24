@@ -23,7 +23,8 @@
   services.displayManager.ly = {
   enable = true;
   settings = { 
-  animation = "doom";
+  animation = "dur_file";
+  dur_file_path = "/etc/ly/blackhole.dur";
   hide_borders = true;
   clock = "%c";
   bigclock = "en";
@@ -36,8 +37,8 @@
   programs.hyprlock.enable = true;
   nixpkgs.config.allowUnfree = true;
   services.hypridle.enable = true;
-  programs.kdeconnect.enable = true;
-
+  environment.etc."ly/blackhole.dur".source = ./blackhole-smooth-240x67.dur;
+  
 
   time.timeZone = "Asia/Tbilisi";
 
@@ -91,10 +92,13 @@
      gcc 
      gnumake
      tree-sitter
-       yt-dlp
-  ffmpeg
-  aria2
-
+     yt-dlp
+     ffmpeg
+     aria2
+     telegram-desktop
+     vlc
+     papers
+     komikku
      ];
   };
 
@@ -103,11 +107,12 @@
 
   environment.systemPackages = with pkgs; [
   adwaita-icon-theme 
-  inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
   inputs.freesm.packages.${pkgs.stdenv.hostPlatform.system}.default
+  inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default
   ffmpeg_4
   whitesur-icon-theme 
   pkgsUnstable.brave-origin
+  helium
   ]; 
 fonts.packages = with pkgs; [
 nerd-fonts.jetbrains-mono
@@ -116,7 +121,6 @@ noto-fonts
 noto-fonts-cjk-serif
 sf-pro
 ];
-
 #font settings
 fonts.fontconfig.localConf = ''
   <?xml version="1.0"?>

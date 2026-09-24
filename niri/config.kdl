@@ -1,11 +1,18 @@
+environment {
+    GTK_IM_MODULE "fcitx"
+    QT_IM_MODULE "fcitx"
+    XMODIFIERS "@im=fcitx"
+}
+
 input {
     keyboard {
         xkb {
             // You can set rules, model, layout, variant and options.
             // For more information, see xkeyboard-config(7).
             // For example:
-            layout "us,ru"
-            options "grp:alt_shift_toggle"
+            layout "us,ru,mosc"
+	    options "grp:alt_shift_toggle"
+           
 
             // If this section is empty, niri will fetch xkb settings
             // from org.freedesktop.locale1. You can control these using
@@ -41,18 +48,18 @@ input {
         // scroll-method "no-scroll"
     }
 
-
     // Uncomment this to make the mouse warp to the center of newly focused windows.
     // warp-mouse-to-focus
 
     // Focus windows and outputs automatically when moving the mouse into them.
+
     // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
     focus-follows-mouse max-scroll-amount="10%"
 }
-cursor {
-    xcursor-theme "WhiteSur-cursors"
-    xcursor-size 26
-}
+ cursor {
+	 xcursor-theme "capitaine-cursors"
+	 xcursor-size 24
+ }
 
 // You can configure outputs by their name, which you can find
 // by running `niri msg outputs` while inside a niri instance.
@@ -106,8 +113,6 @@ layout {
         // off
         color "#34496660"
     }
-
-
 
     // When to center a column when changing focus, options are:
     // - "never", default behavior, focusing an off-screen column will keep at the left
@@ -268,13 +273,13 @@ spawn-at-startup "waybar"
 spawn-at-startup "awww-daemon"
 spawn-at-startup "awww-daemon" "--namespace" "backdrop"
 spawn-at-startup "xwayland-satellite"
-spawn-at-startup "swaync"
 spawn-at-startup "hypridle"
 spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"
 spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
+spawn-at-startup "fcitx5" "-d"
 
-spawn-sh-at-startup "sleep 1 && awww img /home/gatinho/Downloads/Fox_Mulder_1920x1200_upscayl_2x_upscayl-standard-4x.png"
-spawn-sh-at-startup "sleep 1 && awww img --namespace backdrop /home/gatinho/Downloads/Fox_Mulder_1920x1200_upscayl_2x_upscayl-standard-4x.png"
+spawn-sh-at-startup "sleep 1 && awww img \"/home/gatinho/fixed_background.jpg\""
+spawn-sh-at-startup "sleep 1 && awww img --namespace backdrop \"/home/gatinho/Downloads/image.jpg\""
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 
 hotkey-overlay {
@@ -401,27 +406,25 @@ window-rule {
 
 window-rule {
     match app-id="^(|Ghostty|org.gnome.Nautilus)$"
-    match is-active=false
-    opacity 0.85
-    geometry-corner-radius 12
-    clip-to-geometry true
-    background-effect {
-        blur true
-        xray false
-        noise 0.07
-        saturation 1.3
-    }
-}
-window-rule {
-    match app-id="^(|Alacritty)$"
-match is-active=false
     geometry-corner-radius 12
     clip-to-geometry true
     background-effect {
         blur true
         xray false
         noise 0.08
-        saturation 1.6
+        saturation 1.5
+    }
+}
+window-rule {
+    match app-id="^(|Alacritty)$"
+    geometry-corner-radius 12
+    match is-active=false
+    clip-to-geometry true
+    background-effect {
+        blur true
+        xray false
+        noise 0.08
+        saturation 1.5
     }
 }
 

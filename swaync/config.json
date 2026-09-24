@@ -4,14 +4,14 @@
   "positionY": "top",
   "cssPriority": "user",
 
-  "control-center-width": 340,
-  "control-center-height": 620, 
+  "control-center-width": 380,
+  "control-center-height": 750, 
   "control-center-margin-top": 8,
-  "control-center-margin-bottom": 2,
+  "control-center-margin-bottom": 4,
   "control-center-margin-right": 8,
   "control-center-margin-left": 0,
 
-  "notification-window-width": 400,
+  "notification-window-width": 380,
   "notification-icon-size": 48,
   "notification-body-image-height": 0,
   "notification-body-image-width": 0,
@@ -66,7 +66,7 @@
     },
     "mpris": {
       "image-size": 96,
-      "image-radius": 19,
+      "image-radius": 14,
       "show-album-art": "playing",
       "blacklist": [
         "firefox",
@@ -126,4 +126,3 @@
     }
   }
 }
-
