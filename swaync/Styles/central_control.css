@@ -1,13 +1,13 @@
-/* Demure Notification Center - Matte AMOLED & Deep Red */
+/* Demure Notification Center - True AMOLED & Deep Red (Polished) */
 
-@define-color text           #e0e0e0;
-@define-color text-muted     #888888;
-@define-color background     alpha(#050505, 0.96);
-@define-color surface        #141414;
-@define-color surface-hover  #222222;
-@define-color border         #262626;
-@define-color selected       #74070e;
-@define-color hover          #930b14;
+@define-color text           #f0f0f0;
+@define-color text-muted     #909090;
+@define-color background     alpha(#000000, 0.96); /* True AMOLED Black */
+@define-color surface        #111111;
+@define-color surface-hover  #1c1c1c;
+@define-color border         #222222;
+@define-color selected       #820810; /* Slightly brightened red for OLED contrast */
+@define-color hover          #9e0b15;
 @define-color urgent         #cc0000;
 
 * {
@@ -15,7 +15,10 @@
   all: unset;
   font-size: 15px;
   font-family: "SF Pro", "JetBrainsMono Nerd Font Propo", sans-serif;
-  transition: background 150ms ease, border-color 150ms ease, opacity 150ms ease, box-shadow 150ms ease;
+  transition: background 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+              border-color 200ms ease, 
+              opacity 200ms ease, 
+              box-shadow 250ms ease;
 }
 
 .blank-window { 
@@ -26,31 +29,32 @@
 
 .control-center {
   background: @background;
-  border-radius: 16px;
+  border-radius: 20px; /* Smoother, more premium corners */
   border: 1px solid @border;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-  margin: 8px;
-  padding: 0;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.9);
+  margin: 10px;
+  padding: 4px 0 8px 0;
 }
 
 /* ==================== TITLE ==================== */
 
 .widget-title {
-  font-size: 1.05em;
+  font-size: 1.1em;
   font-weight: 600;
   margin: 0;
-  padding: 16px 16px 12px 16px;
-  border-bottom: 1px solid @border;
+  padding: 16px 18px 8px 18px;
+  border-bottom: none; /* No separators */
 }
 
 .widget-title button {
   background: @surface;
   border: 1px solid @border;
   border-radius: 8px;
-  padding: 5px 12px;
+  padding: 6px 14px;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
   min-height: 26px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
 }
 
 .widget-title button:hover {
@@ -60,12 +64,13 @@
 
 .widget-title button:active {
   background: #2a2a2a;
+  box-shadow: none;
 }
 
 /* ==================== QUICK SETTINGS BUTTONS ==================== */
 
 .widget-buttons-grid {
-  padding: 14px 16px;
+  padding: 12px 18px;
   margin: 0;
   background: transparent;
 }
@@ -81,33 +86,35 @@
 }
 
 .widget-buttons-grid > flowbox > flowboxchild > button {
-  margin: 4px;
+  margin: 5px;
   background: @surface;
   border: 1px solid @border;
-  border-radius: 12px;
-  min-height: 48px;
-  min-width: 48px;
+  border-radius: 14px; /* Squircle look */
+  min-height: 50px;
+  min-width: 50px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 .widget-buttons-grid > flowbox > flowboxchild > button:hover {
   background: @surface-hover;
-  border-color: #333333;
+  border-color: #383838;
 }
 
 .widget-buttons-grid > flowbox > flowboxchild > button:active {
   background: #2a2a2a;
+  box-shadow: none;
 }
 
 .widget-buttons-grid > flowbox > flowboxchild > button:checked {
   background: @selected;
   border-color: @selected;
   color: #ffffff;
-  box-shadow: 0 4px 12px alpha(@selected, 0.3);
+  box-shadow: 0 6px 16px alpha(@selected, 0.4); /* Enhanced glow */
 }
 
 .widget-buttons-grid > flowbox > flowboxchild > button label {
   font-family: "JetBrains Mono Nerd Font";
-  font-size: 16px;
+  font-size: 17px;
   opacity: 0.95;
 }
 
@@ -116,13 +123,12 @@
 .widget-volume,
 .widget-backlight {
   background: transparent;
-  padding: 8px 16px;
+  padding: 8px 18px;
   margin: 0;
-  border-top: 1px solid @border;
+  border-top: none; /* No separators */
 }
 
 .widget-volume {
-  border-top: none;
   padding-top: 10px;
 }
 
@@ -130,7 +136,7 @@
 .widget-backlight trough {
   background: @surface;
   border-radius: 8px;
-  min-height: 4px;
+  min-height: 6px; /* Slightly thicker for usability */
   border: 1px solid @border;
 }
 
@@ -138,14 +144,15 @@
 .widget-backlight highlight {
   background: @selected;
   border-radius: 8px;
+  box-shadow: 0 0 10px alpha(@selected, 0.3);
 }
 
 .widget-volume label,
 .widget-backlight label {
   font-family: "JetBrainsMono Nerd Font";
-  font-size: 15px;
-  min-width: 16px;
-  margin-right: 12px;
+  font-size: 16px;
+  min-width: 20px;
+  margin-right: 14px;
   color: @text-muted;
 }
 
@@ -153,25 +160,26 @@
 .widget-backlight slider {
   background: #ffffff;
   border-radius: 50%;
-  min-height: 14px;
-  min-width: 14px;
-  margin: -6px 0;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.8);
+  min-height: 16px;
+  min-width: 16px;
+  margin: -5px 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.8);
 }
 
 .widget-volume slider:hover,
 .widget-backlight slider:hover {
-  background: #e0e0e0;
+  background: #f0f0f0;
+  box-shadow: 0 0 0 4px alpha(#ffffff, 0.1); /* Halo effect on hover */
 }
 
 /* ==================== DO NOT DISTURB ==================== */
 
 .widget-dnd {
   margin: 0;
-  padding: 10px 16px;
+  padding: 12px 18px;
   background: transparent;
-  border-top: 1px solid @border;
-  font-size: 13px;
+  border-top: none; /* No separators */
+  font-size: 14px;
   font-weight: 500;
 }
 
@@ -180,21 +188,22 @@
   border: 1px solid @border;
   border-radius: 20px;
   padding: 2px;
-  min-width: 38px;
-  min-height: 20px;
+  min-width: 42px;
+  min-height: 22px;
 }
 
 .widget-dnd > switch:checked {
   background: @selected;
   border-color: @selected;
+  box-shadow: 0 2px 10px alpha(@selected, 0.3);
 }
 
 .widget-dnd > switch slider {
   background: #ffffff;
   border-radius: 50%;
-  min-width: 16px;
-  min-height: 16px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  min-width: 18px;
+  min-height: 18px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.6);
 }
 
 /* ==================== MEDIA PLAYER ==================== */
@@ -202,52 +211,56 @@
 .widget-mpris {
   background: transparent;
   margin: 0;
-  padding: 12px 16px;
-  border-top: 1px solid @border;
+  padding: 12px 18px;
+  border-top: none; /* No separators */
 }
 
 .widget-mpris-player {
   background: @surface;
   border: 1px solid @border;
-  border-radius: 12px;
-  padding: 10px;
+  border-radius: 16px; /* Smoother corners */
+  padding: 12px;
   margin: 0;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
 }
 
 .widget-mpris .widget-mpris-player .mpris-background {
-  filter: blur(30px) brightness(0.2);
-  opacity: 0.4;
-  border-radius: 12px;
+  filter: blur(35px) brightness(0.2);
+  opacity: 0.5;
+  border-radius: 16px;
   position: absolute;
-  top: -16px;
-  left: -16px;
-  right: -16px;
-  bottom: -16px;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
 }
 
 .widget-mpris-album-art {
-  border-radius: 8px;
+  border-radius: 10px;
   border: 1px solid @border;
-  margin: 0 12px 0 0;
-  min-width: 56px;
-  min-height: 56px;
+  margin: 0 14px 0 0;
+  min-width: 60px;
+  min-height: 60px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.5); /* Pop out effect */
 }
 
 .widget-mpris-title {
-  font-weight: 600;
-  font-size: 0.95rem;
-  margin-bottom: 2px;
+  font-weight: 700;
+  font-size: 0.98rem;
+  margin-bottom: 4px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
 }
 
 .widget-mpris-subtitle {
-  font-weight: 400;
-  font-size: 0.8rem;
+  font-weight: 500;
+  font-size: 0.85rem;
   color: @text-muted;
 }
 
-.widget-mpris button {
+/* Inner Playback Control Buttons */
+.widget-mpris-player button {
   margin: 8px 4px 0 4px;
   min-width: 32px;
   min-height: 32px;
@@ -256,68 +269,103 @@
   border: 1px solid transparent;
 }
 
-.widget-mpris button:hover {
-  background: @surface-hover;
-  border-color: @border;
+.widget-mpris-player button:hover {
+  background: alpha(#ffffff, 0.1);
+  border-color: alpha(#ffffff, 0.15);
 }
 
-.widget-mpris button:active {
-  background: #2a2a2a;
+.widget-mpris-player button:active {
+  background: alpha(#ffffff, 0.05);
 }
 
-.widget-mpris button:nth-child(3) {
-  min-width: 36px;
-  min-height: 36px;
+/* Inner Play/Pause Button */
+.widget-mpris-player button:nth-child(3) {
+  min-width: 38px;
+  min-height: 38px;
   background: @selected;
   border-color: @selected;
   color: #ffffff;
+  box-shadow: 0 4px 12px alpha(@selected, 0.4);
 }
 
-.widget-mpris button:nth-child(3):hover {
+.widget-mpris-player button:nth-child(3):hover {
   background: @hover;
   border-color: @hover;
+  transform: scale(1.05); /* Slight pop on hover */
+}
+
+/* Circled Multi-Player Carousel Arrows (< and >) */
+.widget-mpris carousel button,
+.widget-mpris > box > button,
+.widget-mpris > button {
+  min-width: 32px;
+  min-height: 32px;
+  max-width: 32px;
+  max-height: 32px;
+  border-radius: 50%;
+  background: @surface;
+  border: 1px solid @border;
+  color: @text;
+  margin: auto 8px;
+  padding: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.widget-mpris carousel button:hover,
+.widget-mpris > box > button:hover,
+.widget-mpris > button:hover {
+  background: @surface-hover;
+  border-color: #383838;
+}
+
+.widget-mpris carousel button:active,
+.widget-mpris > box > button:active,
+.widget-mpris > button:active {
+  background: #111111;
+  box-shadow: none;
 }
 
 /* ==================== NOTIFICATIONS ==================== */
 
 .control-center .notification-row {
   margin: 0;
-  padding: 6px 12px;
+  padding: 6px 16px;
 }
 
 .control-center .notification-row .notification-background {
-  background: transparent;
-  border: 1px solid transparent;
-  border-radius: 12px;
+  background: @surface;
+  border: 1px solid @border;
+  border-radius: 14px;
   margin: 4px 0;
   padding: 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
 
 .control-center .notification-row .notification-background:hover {
-  background: @surface;
-  border: 1px solid @border;
+  background: @surface-hover;
+  border-color: #333333;
 }
 
 .control-center .notification-row .notification-background .notification.critical {
-  background: alpha(@urgent, 0.05);
-  border-left: 3px solid @urgent;
+  background: alpha(@urgent, 0.1);
+  border-left: 4px solid @urgent;
 }
 
 .control-center .notification-row .notification-background .notification .notification-content {
   margin: 0;
-  padding: 12px 14px;
+  padding: 14px 16px;
 }
 
 .control-center .notification-row .notification-background .notification .notification-content .notification-body {
-  padding-top: 4px;
+  padding-top: 6px;
   color: @text-muted;
-  line-height: 1.35;
-  font-size: 13px;
+  line-height: 1.4;
+  font-size: 13.5px;
 }
 
 .control-center .notification-row .notification-background .notification > *:last-child > * {
   min-height: auto;
-  padding: 6px 12px 12px 12px;
+  padding: 6px 14px 14px 14px;
 }
 
 .control-center .notification-row .notification-background .notification > *:last-child > * .notification-action {
@@ -325,17 +373,18 @@
   border: 1px solid @border;
   border-radius: 8px;
   margin: 3px;
-  padding: 6px 12px;
-  font-size: 12.5px;
+  padding: 6px 14px;
+  font-size: 13px;
   font-weight: 500;
   min-height: 28px;
 }
 
 .control-center .notification-row .notification-background .notification > *:last-child > * .notification-action:hover {
   background: @surface-hover;
-  border-color: #333333;
+  border-color: #444444;
 }
 
 .control-center image.no-notifications {
   opacity: 0.3;
+  margin-top: 10px;
 }

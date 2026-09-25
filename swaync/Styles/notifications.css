@@ -1,101 +1,120 @@
-@define-color text           #e0e0e0;
-@define-color text-muted     #888888;
-@define-color background     alpha(#050505, 0.96);
-@define-color surface        #141414;
-@define-color surface-hover  #222222;
-@define-color border         #262626;
-@define-color selected       #74070e;
-@define-color hover          #930b14;
-@define-color urgent         #cc0000;
+@define-color text           #f4f4f5;
+@define-color text-muted     #a1a1aa;
+@define-color glass-bg       alpha(#121318, 0.65);
+@define-color glass-border   rgba(255, 255, 255, 0.12);
+@define-color glass-top      rgba(255, 255, 255, 0.25);
+@define-color surface        rgba(255, 255, 255, 0.05);
+@define-color surface-hover  rgba(255, 255, 255, 0.12);
+@define-color selected       #677f9e;
+@define-color urgent         #d9534f;
 
 * {
   color: @text;
   all: unset;
   font-size: 14px;
   font-family: "JetBrains Mono Nerd Font 10";
-  transition: 150ms ease;
+  transition: 150ms cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .notification-row {
   outline: none;
   margin: 0;
-  padding: 0px;
+  padding: 0;
+  background: transparent;
 }
 
+/* Glass Card Container */
 .floating-notifications.background .notification-row .notification-background {
-  background: @background;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.8);
-  border: 1px solid @border;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.01) 100%
+  ), @glass-bg;
+  
+  /* Liquid Borders */
+  border: 1px solid @glass-border;
+  border-top: 1px solid @glass-top;
   border-radius: 16px;
-  margin: 16px;
+  
+  /* Inset Light Highlights (Eliminates blocky exterior shadow artifacts) */
+  box-shadow: 
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.20),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.30);
+    
+  margin: 10px 14px;
   padding: 0;
 }
 
 .floating-notifications.background .notification-row .notification-background .notification {
-  padding: 8px;
+  padding: 10px;
   border-radius: 16px;
+  background: transparent;
 }
 
+/* Critical Alert Glass Treatment */
 .floating-notifications.background .notification-row .notification-background .notification.critical {
-  border: 1px solid @urgent;
-  background: alpha(@urgent, 0.05);
+  border: 1px solid alpha(@urgent, 0.5);
+  border-top: 1px solid alpha(@urgent, 0.8);
+  background: linear-gradient(135deg, alpha(@urgent, 0.20) 0%, alpha(@urgent, 0.05) 100%);
+  box-shadow: inset 0 1px 0 0 alpha(@urgent, 0.6);
 }
 
 .floating-notifications.background .notification-row .notification-background .notification .notification-content {
-  margin: 14px;
+  margin: 12px;
 }
 
 .floating-notifications.background .notification-row .notification-background .notification > *:last-child > * {
   min-height: 3.4em;
 }
 
+/* Glass Action Buttons */
 .floating-notifications.background .notification-row .notification-background .notification > *:last-child > * .notification-action {
-  border-radius: 8px;
+  border-radius: 10px;
   background-color: @surface;
   margin: 6px;
-  border: 1px solid @border;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
 }
 
 .floating-notifications.background .notification-row .notification-background .notification > *:last-child > * .notification-action:hover {
   background-color: @surface-hover;
-  border-color: #333333;
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
 .floating-notifications.background .notification-row .notification-background .notification > *:last-child > * .notification-action:active {
-  background-color: #2a2a2a;
+  background-color: rgba(255, 255, 255, 0.18);
 }
 
 .image {
-  margin: 10px 20px 10px 0px;
+  margin: 10px 16px 10px 0;
+  border-radius: 8px;
 }
 
 .summary {
   font-weight: 600;
-  font-size: 1.05rem;
+  font-size: 1.02rem;
 }
 
 .body {
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   color: @text-muted;
 }
 
+/* Close Button */
 .floating-notifications.background .notification-row .notification-background .close-button {
-  margin: 6px;
-  padding: 4px;
+  margin: 8px;
+  padding: 4px 6px;
   border-radius: 8px;
   background-color: transparent;
   border: 1px solid transparent;
 }
 
 .floating-notifications.background .notification-row .notification-background .close-button:hover {
-  background-color: @surface;
-  border-color: @border;
+  background-color: @surface-hover;
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
-.floating-notifications.background .notification-row .notification-background .close-button:active {
-  background-color: #2a2a2a;
-}
-
+/* Progress Bars */
 .notification.critical progress {
   background-color: @urgent;
   border-radius: 4px;

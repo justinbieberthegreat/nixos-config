@@ -10,8 +10,6 @@
     #pkgs.numix-cursor-theme
   ];
 
-
-
 home.pointerCursor = {
   package = pkgs.capitaine-cursors;
   name = "capitaine-cursors";
@@ -19,6 +17,7 @@ home.pointerCursor = {
   gtk.enable = true;
   x11.enable = true;
 };
+
   i18n.inputMethod = {
   enable = true;
   type = "fcitx5";
@@ -30,8 +29,7 @@ home.pointerCursor = {
       fcitx5-gtk
     ];
   };
-};
-
+};  
   programs.home-manager.enable = true;programs.fish = {
   enable = true;
   interactiveShellInit = ''
@@ -121,5 +119,7 @@ xdg.configFile."fontconfig/fonts.conf".text = ''
    home.file.".config/swaync/Styles/central_control.css".source = ./swaync/Styles/central_control.css;
    home.file.".config/swaync/Styles/notifications.css".source = ./swaync/Styles/notifications.css;
    home.file.".config/matugen/colors.css".source = ./swaync/matugen/colors.css;
+   xdg.configFile."mpv/scripts/mpvacious".source =
+   config.lib.file.mkOutOfStoreSymlink "/home/gatinho/mpvacious";
 }
 

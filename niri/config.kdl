@@ -279,7 +279,7 @@ spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
 spawn-at-startup "fcitx5" "-d"
 
 spawn-sh-at-startup "sleep 1 && awww img \"/home/gatinho/fixed_background.jpg\""
-spawn-sh-at-startup "sleep 1 && awww img --namespace backdrop \"/home/gatinho/Downloads/image.jpg\""
+spawn-sh-at-startup "sleep 1 && awww img --namespace backdrop \"/home/gatinho/Downloads/pics/image.jpg\""
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 
 hotkey-overlay {
@@ -533,6 +533,8 @@ binds {
 
     Mod+Left  { focus-column-left; }
     Mod+Down  { focus-window-down; }
+    Mod+X { toggle-window-floating; }
+    Mod+Shift+X { center-column; }
     Mod+Up    { focus-window-up; }  
     Mod+Right { focus-column-right; }
     Mod+H     { focus-column-left; }

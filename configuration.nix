@@ -15,7 +15,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
-
+  
   networking.hostName = "gatinho"; 
   networking.networkmanager.enable = true;
   
@@ -24,6 +24,7 @@
   enable = true;
   settings = { 
   animation = "dur_file";
+  full_color = true;
   dur_file_path = "/etc/ly/blackhole.dur";
   hide_borders = true;
   clock = "%c";
@@ -39,7 +40,7 @@
   services.hypridle.enable = true;
   environment.etc."ly/blackhole.dur".source = ./blackhole-smooth-240x67.dur;
   
-
+  
   time.timeZone = "Asia/Tbilisi";
 
   services.pipewire = {
@@ -59,6 +60,7 @@
   extraGroups = [ "networkmanager" "wheel" ];
   packages = with pkgs; [
      alacritty
+     stremio-linux-shell
      fastfetch
      overskride
      nautilus
@@ -83,7 +85,8 @@
      hyprlock
      anki
      qbittorrent
-     rofi 
+     rofi
+     libnotify
      cliphist 
      wl-clipboard 
      wtype 
@@ -99,6 +102,9 @@
      vlc
      papers
      komikku
+     cmus
+     curl
+     python3
      ];
   };
 
@@ -110,10 +116,13 @@
   inputs.freesm.packages.${pkgs.stdenv.hostPlatform.system}.default
   inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default
   ffmpeg_4
+  xdg-user-dirs
   whitesur-icon-theme 
   pkgsUnstable.brave-origin
+  mpv
   helium
   ]; 
+
 fonts.packages = with pkgs; [
 nerd-fonts.jetbrains-mono
 inter
