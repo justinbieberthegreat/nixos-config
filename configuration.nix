@@ -19,6 +19,10 @@
   networking.hostName = "gatinho"; 
   networking.networkmanager.enable = true;
   
+  services.udev.extraRules = ''
+  ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="1ea7", ATTR{idProduct}=="0066", TEST=="power/control", ATTR{power/control}="on"
+'';
+
   programs.niri.enable = true;
   services.displayManager.ly = {
   enable = true;
@@ -59,8 +63,7 @@
   isNormalUser = true;
   extraGroups = [ "networkmanager" "wheel" ];
   packages = with pkgs; [
-     alacritty
-     stremio-linux-shell
+     alacritty 
      fastfetch
      overskride
      nautilus
@@ -104,11 +107,12 @@
      komikku
      cmus
      curl
+     stremio-linux-shell
      python3
      ];
   };
 
-  programs.firefox.enable = true;
+  programs.firefox.enable = false;
   nixpkgs.overlays = [ inputs.apple-fonts.overlays.default ];
 
   environment.systemPackages = with pkgs; [
