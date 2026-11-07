@@ -1,0 +1,11 @@
+# secrets / local-only
+secrets.*
+*.env
+.env
+
+# editor / OS junk
+*.swp
+*~
+.DS_Store
+.qmlls.ini
+.directory

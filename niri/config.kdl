@@ -145,12 +145,11 @@ layout {
 
     // By default focus ring and border are rendered as a solid background rectangle
     // behind windows. That is, they will show up through semitransparent windows.
-    // This is because windows using client-side decorations can have an arbitrary shape.
-    //
+    // This is because windows using client-side decorations can have an arbitrary shap
+
     // If you don't like that, you should uncomment `prefer-no-csd` below.
     // Niri will draw focus ring and border *around* windows that agree to omit their
     // client-side decorations.
-    //
     // Alternatively, you can override it with a window rule called
     // `draw-border-with-background`.
 
@@ -255,10 +254,9 @@ layout {
     // Top and bottom struts will simply add outer gaps in addition to the area occupied by
     // layer-shell panels and regular gaps.
     struts {
-        // left 64
-        // right 64
-        // top 64
-        // bottom 64
+ left 0
+        right 0
+        bottom 0
     }
 }
 
@@ -269,7 +267,7 @@ layout {
 // See the binds section below for more spawn examples.
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
-spawn-at-startup "waybar"
+
 spawn-at-startup "awww-daemon"
 spawn-at-startup "awww-daemon" "--namespace" "backdrop"
 spawn-at-startup "xwayland-satellite"
@@ -277,10 +275,10 @@ spawn-at-startup "hypridle"
 spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"
 spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
 spawn-at-startup "fcitx5" "-d"
+spawn-at-startup "qs"
 
-spawn-sh-at-startup "sleep 1 && awww img \"/home/gatinho/fixed_background.jpg\""
-spawn-sh-at-startup "sleep 1 && awww img --namespace backdrop \"/home/gatinho/Downloads/pics/image.jpg\""
-// spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
+spawn-sh-at-startup "sleep 1 && awww img \"/home/gatinho/Downloads/heavinitos11.png\""
+spawn-sh-at-startup "sleep 1 && awww img --namespace backdrop \"/home/gatinho/Downloads/image (8).jpg\""
 
 hotkey-overlay {
     // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
@@ -292,7 +290,7 @@ hotkey-overlay {
 // Additionally, clients will be informed that they are tiled, removing some client-side rounded corners.
 // This option will also fix border/focus ring drawing behind some semitransparent windows.
 // After enabling or disabling this, you need to restart the apps for this to take effect.
-// prefer-no-csd
+ prefer-no-csd
 
 // You can change the path where screenshots are saved.
 // A ~ at the front will be expanded to the home directory.
@@ -386,35 +384,16 @@ layer-rule {
     }
 }
 
+
+
+
 layer-rule {
     match namespace="^awww-daemonbackdrop$"
     place-within-backdrop true
 }
 
-window-rule {
-    match app-id="^(|codium)$"
-     geometry-corner-radius 12
-    clip-to-geometry true
-
-    opacity 0.9  // 
-    background-effect {
-        blur true
-        noise 0.08
-    }
-}
 
 
-window-rule {
-    match app-id="^(|Ghostty|org.gnome.Nautilus)$"
-    geometry-corner-radius 12
-    clip-to-geometry true
-    background-effect {
-        blur true
-        xray false
-        noise 0.08
-        saturation 1.5
-    }
-}
 window-rule {
     match app-id="^(|Alacritty)$"
     geometry-corner-radius 12
@@ -492,10 +471,15 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+W hotkey-overlay-title="Open a Terminal: ghostty" { spawn "alacritty"; }
-    Mod+D { spawn "rofi" "-show" "drun" "-theme" "~/.config/rofi/vicinae.rasi"; }
+
+    Mod+J { spawn "ocr-scan"; }                  // Japanese, copy to clipboard
+Mod+K { spawn "ocr-scan" "-l" "ko"; }        // Korean
+Mod+Alt+C { spawn "ocr-scan" "-l" "zh"; }        // Chinese (simplified)
+Mod+Alt+V { spawn "ocr-scan" "-v"; }             // Japanese, vertical text
+    Mod+A { spawn "qs" "ipc" "call" "clipboard" "toggle"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
     // Toggle SwayNC Control Center
-    Mod+A { spawn "swaync-client" "-t" "-sw"; }
+    Mod+D { spawn "qs" "ipc" "call" "launcher" "toggle"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
@@ -506,10 +490,19 @@ binds {
     // The allow-when-locked=true property makes them work even when the session is locked.
     // Using spawn-sh allows to pass multiple arguments together with the command.
     // "-l 1.0" limits the volume to 100%.
-    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
-    XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
-    XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+XF86AudioRaiseVolume allow-when-locked=true {
+    spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+" "--limit" "1.0";
+}
+XF86AudioLowerVolume allow-when-locked=true {
+    spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-";
+}
+XF86AudioMute allow-when-locked=true {
+    spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle";
+}
+XF86AudioMicMute allow-when-locked=true {
+    spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle";
+}
+
 
     // Example media keys mapping using playerctl.
     // This will work with any MPRIS-enabled media player.
@@ -521,9 +514,12 @@ binds {
     // Example brightness key mappings for brightnessctl.
     // You can use regular spawn with multiple arguments too (to avoid going through "sh"),
     // but you need to manually put each argument in separate "" quotes.
-    XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
-
+XF86MonBrightnessUp allow-when-locked=true {
+    spawn "brightnessctl" "set" "+10%";
+}
+XF86MonBrightnessDown allow-when-locked=true {
+    spawn "brightnessctl" "set" "10%-";
+}
     // Open/close the Overview: a zoomed-out view of workspaces and windows.
     // You can also move the mouse into the top-left hot corner,
     // or do a four-finger swipe up on a touchpad.
@@ -538,11 +534,9 @@ binds {
     Mod+Up    { focus-window-up; }  
     Mod+Right { focus-column-right; }
     Mod+H     { focus-column-left; }
-    Mod+J     { focus-window-down; }
-    Mod+K     { focus-window-up; }
     Mod+P    { focus-column-right; }
     Mod+E     { spawn "nautilus";}
-    Mod+N { spawn "hyprlock";}
+    Mod+N { spawn-sh "~/.config/hypr/scripts/manual-lock.sh";}
 
     Mod+Ctrl+Left  { move-column-left; }
     Mod+Ctrl+Down  { move-window-down; }
@@ -638,8 +632,8 @@ binds {
     // These binds are also affected by touchpad's natural-scroll, so these
     // example binds are "inverted", since we have natural-scroll enabled for
     // touchpads by default.
-    // Mod+TouchpadScrollDown { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.02+"; }
-    // Mod+TouchpadScrollUp   { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.02-"; }
+    Mod+TouchpadScrollDown { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.02+"; }
+    Mod+TouchpadScrollUp   { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.02-"; }
 
     // You can refer to workspaces by index. However, keep in mind that
     // niri is a dynamic workspace system, so these commands are kind of
@@ -727,7 +721,6 @@ binds {
     Mod+Shift+Equal { set-window-height "+10%"; }
 
     // Move the focused window between the floating and the tiling layout.
-    Mod+V { spawn "sh" "-c" "cliphist list | rofi -dmenu -display-columns 2 -theme ~/.config/rofi/vicinae.rasi -p 'Clipboard' | cliphist decode | wl-copy && wtype -M ctrl -k v -m ctrl"; }
     Mod+Shift+V { switch-focus-between-floating-and-tiling; }
     Mod+Shift+B { spawn "sh" "-c" "pkill waybar; sleep 0.3; waybar"; }
 

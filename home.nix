@@ -5,10 +5,15 @@
   home.homeDirectory = "/home/gatinho";
 
   home.stateVersion = "26.05"; 
-  home.packages = [
-    #pkgs.hello
-    #pkgs.numix-cursor-theme
+
+  home.packages = with pkgs; [
+  pkgs.fzf
+  whitesur-gtk-theme
+  whitesur-icon-theme
+  (import ./ocr-scan.nix { inherit pkgs; })
   ];
+  
+gtk.enable = true;
 
 home.pointerCursor = {
   package = pkgs.capitaine-cursors;
@@ -17,6 +22,8 @@ home.pointerCursor = {
   gtk.enable = true;
   x11.enable = true;
 };
+xdg.configFile."mpv/scripts/skip.lua".source =
+  "${pkgs.ani-skip}/share/mpv/scripts/skip.lua";
 
   i18n.inputMethod = {
   enable = true;
@@ -38,6 +45,7 @@ home.pointerCursor = {
   shellAliases = {
     ls = "lsd";
     l = "ls -l";
+    ac = "ani-cli";
     la = "ls -a";
     lt = "ls --tree";
     cat = "bat";
@@ -110,15 +118,7 @@ xdg.configFile."fontconfig/fonts.conf".text = ''
    };
    home.file.".config/niri/config.kdl".source = ./niri/config.kdl;
    home.file.".config/hypr/hypridle.conf".source = ./hypr/hypridle.conf;
-   home.file.".config/waybar/config.jsonc".source = ./waybar/config.jsonc;
-   home.file.".config/waybar/style.css".source = ./waybar/style.css;
-   home.file.".config/rofi/vicinae.rasi".source = ./rofi/vicinae.rasi;
    home.file.".config/fastfetch/config.jsonc".source = ./fastfetch/config.jsonc;
-   home.file.".config/swaync/config.json".source = ./swaync/config.json;
-   home.file.".config/swaync/style.css".source = ./swaync/style.css;
-   home.file.".config/swaync/Styles/central_control.css".source = ./swaync/Styles/central_control.css;
-   home.file.".config/swaync/Styles/notifications.css".source = ./swaync/Styles/notifications.css;
-   home.file.".config/matugen/colors.css".source = ./swaync/matugen/colors.css;
    xdg.configFile."mpv/scripts/mpvacious".source =
    config.lib.file.mkOutOfStoreSymlink "/home/gatinho/mpvacious";
 }
