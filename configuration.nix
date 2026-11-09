@@ -12,7 +12,6 @@
   };
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
   boot.kernelPackages = pkgs.linuxPackages_latest;
   networking.hostName = "gatinho"; 
   networking.networkmanager.enable = true;
@@ -125,6 +124,7 @@ backgrounds = {
       fastfetch
       overskride
       nautilus
+      gnome-boxes
       xwayland-satellite
       neovim
       android-tools
@@ -166,7 +166,6 @@ backgrounds = {
     ];
   };
 
-  programs.firefox.enable = false;
 
   nixpkgs.overlays = [ 
     inputs.apple-fonts.overlays.default
@@ -186,9 +185,9 @@ inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.chatgpt
     })
     ffmpeg
     xdg-user-dirs
-    pkgsUnstable.brave-origin
     pkgsUnstable.ani-cli
     mpv
+    brave-origin
     helium
     jdk21
     stremio-linux-shell

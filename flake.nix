@@ -17,6 +17,10 @@ description = "flakies";
     url = "github:SpotX-Official/SpotX-Nix";
      inputs.nixpkgs.follows = "nixpkgs"; 
     };
+    brave = {
+    url = "git+https://codeberg.org/buckley310/brave-browser-nix?ref=main";
+    inputs.nixpkgs.follows = "nixpkgs";
+    };
     zen-browser = {
     url = "github:0xc000022070/zen-browser-flake";
     inputs = {
@@ -26,7 +30,7 @@ description = "flakies";
     };
     };
 
-outputs = { self, nixpkgs, nixpkgs-unstable, freesm, home-manager, helium-flake, ... }@inputs:
+outputs = { self, nixpkgs, nixpkgs-unstable, freesm, home-manager, helium-flake, brave, ... }@inputs:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -38,6 +42,7 @@ outputs = { self, nixpkgs, nixpkgs-unstable, freesm, home-manager, helium-flake,
         specialArgs = { inherit inputs; };
         modules = [ 
 	./configuration.nix 
+	brave.nixosModules.default
        {	
        nixpkgs.overlays = [ helium-flake.overlays.default ];
 	}
