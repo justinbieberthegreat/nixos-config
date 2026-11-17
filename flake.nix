@@ -5,7 +5,6 @@ description = "flakies";
     llm-agents.url = "github:numtide/llm-agents.nix";
     apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
-    freesm.url = "github:FreesmTeam/FreesmLauncher";
     helium-flake.url = "github:oxcl/nix-flake-helium-browser";
     home-manager.url = "github:nix-community/home-manager/release-26.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -28,9 +27,13 @@ description = "flakies";
     home-manager.follows = "home-manager";
     };
     };
-    };
+    dl-desktop-src = {
+  url = "github:hmlendea/dl-desktop/d493f6de6b465cb279bda2eb9780cda19d4acdb5";
+  flake = false;
+};
+      };
 
-outputs = { self, nixpkgs, nixpkgs-unstable, freesm, home-manager, helium-flake, brave, ... }@inputs:
+outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, helium-flake, brave, ... }@inputs:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";

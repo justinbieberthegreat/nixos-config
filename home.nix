@@ -116,9 +116,9 @@ xdg.configFile."fontconfig/fonts.conf".text = ''
      theme = "Nord"; 
      };
    };
-   home.file.".config/niri/config.kdl".source = ./niri/config.kdl;
-   home.file.".config/hypr/hypridle.conf".source = ./hypr/hypridle.conf;
-   home.file.".config/fastfetch/config.jsonc".source = ./fastfetch/config.jsonc;
+   home.file."./niri/config.kdl".source = ./niri/config.kdl;
+   home.file."./hypr/hypridle.conf".source = ./hypr/hypridle.conf;
+   home.file."./fastfetch/config.jsonc".source = ./fastfetch/config.jsonc;
    xdg.configFile."mpv/scripts/mpvacious".source =
    config.lib.file.mkOutOfStoreSymlink "/home/gatinho/mpvacious";
 }

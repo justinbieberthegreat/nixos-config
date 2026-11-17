@@ -23,7 +23,8 @@
     enable = true;
     wayland.enable = true;
   };
-
+  
+  programs.firefox.enable = true;
 
   programs.silentSDDM = {
     enable = true;
@@ -83,7 +84,6 @@ backgrounds = {
   };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  programs.steam.enable = true;
   services.gvfs.enable = true;
   programs.hyprlock.enable = true;
   
@@ -124,10 +124,8 @@ backgrounds = {
       fastfetch
       overskride
       nautilus
-      gnome-boxes
       xwayland-satellite
       neovim
-      android-tools
       nwg-look
       vscodium
       brightnessctl
@@ -145,7 +143,7 @@ backgrounds = {
       libnotify
       cliphist 
       wl-clipboard 
-      wtype 
+      wtype
       lsd
       kdePackages.okular
       bat 
@@ -170,11 +168,11 @@ backgrounds = {
   nixpkgs.overlays = [ 
     inputs.apple-fonts.overlays.default
     inputs.spotx-nix.overlays.default
-  ];
+       ];
 
   environment.systemPackages = with pkgs; [
     adwaita-icon-theme
-    inputs.freesm.packages.${pkgs.stdenv.hostPlatform.system}.default
+    antigravity
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-desktop
 inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.chatgpt
@@ -189,6 +187,7 @@ inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.chatgpt
     mpv
     brave-origin
     helium
+    (pkgs.callPackage ./package.nix { src = inputs.dl-desktop-src; })
     jdk21
     stremio-linux-shell
     (mousam.overrideAttrs (old: {
@@ -209,6 +208,7 @@ inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.chatgpt
     sf-pro
     noto-fonts-cjk-sans
   ];
+
 
   fonts.fontconfig.localConf = ''
     <?xml version="1.0"?>

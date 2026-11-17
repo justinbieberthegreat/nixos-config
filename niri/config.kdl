@@ -1,6 +1,4 @@
 environment {
-    GTK_IM_MODULE "fcitx"
-    QT_IM_MODULE "fcitx"
     XMODIFIERS "@im=fcitx"
 }
 
@@ -277,8 +275,8 @@ spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
 spawn-at-startup "fcitx5" "-d"
 spawn-at-startup "qs"
 
-spawn-sh-at-startup "sleep 1 && awww img \"/home/gatinho/Downloads/heavinitos11.png\""
-spawn-sh-at-startup "sleep 1 && awww img --namespace backdrop \"/home/gatinho/Downloads/image (8).jpg\""
+spawn-sh-at-startup "sleep 1 && awww img \"/home/gatinho/Downloads/wallhaven1-9okg7x_1920x1200.png\""
+spawn-sh-at-startup "sleep 1 && awww img --namespace backdrop \"/home/gatinho/Downloads/image.jpg\""
 
 hotkey-overlay {
     // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
