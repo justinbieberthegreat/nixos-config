@@ -5,6 +5,7 @@ description = "flakies";
     llm-agents.url = "github:numtide/llm-agents.nix";
     apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
+    xremap-flake.url = "github:xremap/nix-flake";
     helium-flake.url = "github:oxcl/nix-flake-helium-browser";
     home-manager.url = "github:nix-community/home-manager/release-26.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -16,10 +17,6 @@ description = "flakies";
     url = "github:SpotX-Official/SpotX-Nix";
      inputs.nixpkgs.follows = "nixpkgs"; 
     };
-    brave = {
-    url = "git+https://codeberg.org/buckley310/brave-browser-nix?ref=main";
-    inputs.nixpkgs.follows = "nixpkgs";
-    };
     zen-browser = {
     url = "github:0xc000022070/zen-browser-flake";
     inputs = {
@@ -27,13 +24,14 @@ description = "flakies";
     home-manager.follows = "home-manager";
     };
     };
-    dl-desktop-src = {
+    nixpkgs-stremio.url = "github:NixOS/nixpkgs/51e103be12cdd94c2af4956e311b66e84af4fb4a";
+dl-desktop-src = {
   url = "github:hmlendea/dl-desktop/d493f6de6b465cb279bda2eb9780cda19d4acdb5";
   flake = false;
 };
       };
 
-outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, helium-flake, brave, ... }@inputs:
+outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, helium-flake, nixpkgs-stremio, xremap-flake,  ... }@inputs:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -44,8 +42,8 @@ outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, helium-flake, brave, 
         inherit system;
         specialArgs = { inherit inputs; };
         modules = [ 
-	./configuration.nix 
-	brave.nixosModules.default
+	./configuration.nix
+        xremap-flake.nixosModules.default
        {	
        nixpkgs.overlays = [ helium-flake.overlays.default ];
 	}

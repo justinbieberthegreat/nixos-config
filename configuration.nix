@@ -1,4 +1,4 @@
-{ config, lib, pkgs, pkgsUnstable, inputs, ... }:
+{ config, lib, pkgs, pkgsUnstable, inputs, pkgsStremio, ... }:
 
 {
   imports = [
@@ -10,11 +10,17 @@
     inherit (pkgs.stdenv.hostPlatform) system;
     inherit (config.nixpkgs) config;
   };
+    _module.args.pkgsStremio = import inputs.nixpkgs-stremio {
+    inherit (pkgs.stdenv.hostPlatform) system;
+    inherit (config.nixpkgs) config;
+  };
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
   networking.hostName = "gatinho"; 
   networking.networkmanager.enable = true;
+
 
   programs.niri.enable = true;
   programs.kdeconnect.enable = true;
@@ -118,6 +124,7 @@ backgrounds = {
       discord
       sqlite
       playerctl
+      woeusb-ng
       gradle_8
       quickshell
       proton-vpn
@@ -173,6 +180,7 @@ backgrounds = {
   environment.systemPackages = with pkgs; [
     adwaita-icon-theme
     antigravity
+    brave-origin
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-desktop
 inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.chatgpt
@@ -182,15 +190,15 @@ inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.chatgpt
       spotxArgs = [ "--hide" ];
     })
     ffmpeg
+    ungoogled-chromium
     xdg-user-dirs
     pkgsUnstable.ani-cli
     mpv
-    brave-origin
     helium
     (pkgs.callPackage ./package.nix { src = inputs.dl-desktop-src; })
     jdk21
-    stremio-linux-shell
-    (mousam.overrideAttrs (old: {
+       pkgsStremio.stremio-linux-shell
+   (mousam.overrideAttrs (old: {
   postPatch = (old.postPatch or "") + ''
     substituteInPlace src/frontendCardAirPollution.py \
       --replace-fail \

@@ -21,7 +21,8 @@ stdenvNoCC.mkDerivation {
 
   desktopItems = [
     (makeDesktopItem {
-      name = "ro.go.hmlendea.DL-Desktop";
+      name = "dl-language-lessons";
+      startupWMClass = "dl-language-lessons";
       desktopName = "Duolingo Desktop";
       comment = "Unofficial desktop client for Duolingo";
       exec = "dl-desktop";
@@ -35,9 +36,10 @@ stdenvNoCC.mkDerivation {
 
     mkdir -p $out/lib/dl-desktop
     cp -r package.json scripts icon.png $out/lib/dl-desktop/
-    install -Dm444 icon.png $out/share/pixmaps/dl-desktop.png
+    install -Dm444 ${./dl-desktop.png} $out/share/pixmaps/dl-desktop.png
 
     makeWrapper ${electron}/bin/electron $out/bin/dl-desktop \
+      --add-flags "--ozone-platform-hint=auto" \
       --add-flags "$out/lib/dl-desktop" \
       --set ELECTRON_IS_DEV 0
 

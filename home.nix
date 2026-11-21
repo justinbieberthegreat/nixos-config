@@ -8,6 +8,7 @@
 
   home.packages = with pkgs; [
   pkgs.fzf
+  jq
   whitesur-gtk-theme
   whitesur-icon-theme
   (import ./ocr-scan.nix { inherit pkgs; })
